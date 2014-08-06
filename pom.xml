@@ -22,8 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -34,7 +33,7 @@ THE SOFTWARE.
 
   <groupId>org.jenkins-ci.plugins.icon-shim</groupId>
   <artifactId>icon-shim</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
 
   <name>Icon Shim Base POM.</name>
@@ -61,6 +60,7 @@ THE SOFTWARE.
     <connection>scm:git:git://github.com/jenkinsci/icon-shim-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/icon-shim-plugin.git</developerConnection>
     <url>http://github.com/jenkinsci/icon-shim-plugin</url>
+    <tag>icon-shim-1.0.0</tag>
   </scm>
 
   <developers>
