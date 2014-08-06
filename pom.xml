@@ -32,7 +32,7 @@ THE SOFTWARE.
   </parent>
 
   <groupId>org.jenkins-ci.plugins.icon-shim</groupId>
-  <artifactId>icon-shim</artifactId>
+  <artifactId>icon-shim-pom</artifactId>
   <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
