@@ -43,7 +43,7 @@ public class IconSet {
 
     private static final Icon NO_ICON = new Icon("_", "_", "_");
 
-    private IconSet() {
+    public IconSet() {
     }
 
     public static void initPageVariables(JellyContext context) {

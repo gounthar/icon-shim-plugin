@@ -1,0 +1,103 @@
+<!--
+The MIT License
+
+Copyright (c) 2004-2009, Sun Microsystems, Inc., Kohsuke Kawaguchi
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler">
+  <st:documentation>
+    <st:attribute name="class" use="required">
+      The icon class specification e.g. 'icon-help icon-sm', 'icon-blue icon-md', 'icon-blue-anime icon-xlg'.
+    </st:attribute>
+
+    <st:attribute name="iconSize">
+      The icon size ala the legacy sizes of '16x16', '24x24', '32x32' and '48x48'.  This attribute value will be
+      mapped to one of the new size specifications 'icon-sm', 'icon-md', 'icon-lg' and 'icon-xlg'.
+    </st:attribute>
+
+    <st:attribute name="onclick">onclick handler.</st:attribute>
+    <st:attribute name="title">title</st:attribute>
+    <st:attribute name="style">style</st:attribute>
+    <st:attribute name="tooltip">tooltip</st:attribute>
+
+    <st:attribute name="alt">alt</st:attribute>
+  </st:documentation>
+
+  <!--
+    We also tried implementing this tag using both Java and Groovy:
+      * Java tags work fine if the taglib is defined in Jenkins core. They do not work if defined
+        in the plugin because of how the XMLParser resolves the ClassLoader for the tag class.
+      * Groovy based tags work fine in the plugin (different classloader) so long as the underlying
+        Jenkins has the stapler-groovy fix for JENKINS-21524.  Plugin based Groovy tags will not work
+        on older versions of Jenkins that do not have that fix.
+
+     Because of the above, we ended up with no other option but to implement in Jelly.  Sorry for
+     the ugliness.
+  -->
+
+  <j:if test="${!testedForIconTag}">
+    <!--
+    The following ClassLoader ugliness is unavoidable because <j:new> etc are
+    not able to see the Java classes in the plugin (e.g. the IconSet etc).  Instead,
+    we need to use the Taglib's MetaClassLoader ClassLoader.
+    -->
+
+    <j:set var="metaClassLoader" scope="parent" value="${context.getTagLibrary('/shim/layout/icon').metaClassLoader.loader}" />
+    <j:set var="jenkinsClass" scope="parent" value="${metaClassLoader.loadClass('jenkins.model.Jenkins')}" />
+    <j:set var="iconTagAvailable" scope="parent" value="${jenkinsClass.getResource('/lib/layout/icon.jelly') != null}" />
+    <j:set var="iconSetClass" scope="parent" value="${metaClassLoader.loadClass('org.jenkins.ui.icon.IconSet')}" />
+    <j:set var="iconSet" scope="parent" value="${iconSetClass.newInstance()}" />
+    <j:set var="icons" scope="parent" value="${iconSet.icons}" />
+    <j:set var="testedForIconTag" scope="parent" value="true" />
+  </j:if>
+
+  <j:set var="iconSpec" value="${attrs.class}" />
+  <j:set var="iconSize" value="${attrs.iconSize}" />
+  <j:if test="${iconSize != null}">
+    <j:set var="iconSizeSpec" value="${icons.toNormalizedIconSizeClass(iconSize)}" />
+    <j:set var="iconSpec" value="${iconSpec + ' ' + iconSizeSpec}" />
+  </j:if>
+
+  <j:if test="${iconSpec != null}">
+    <j:choose>
+      <j:when test="${iconTagAvailable}">
+        <l:icon class="${iconSpec}" onclick="${attrs.onclick}" title="${attrs.title}"
+                style="${attrs.style}" tooltip="${attrs.tooltip}" alt="${attrs.alt}"
+                xmlns:l="/lib/layout" />
+      </j:when>
+      <j:otherwise>
+        <j:set var="iconDef" value="${icons.getIconByClassSpec(iconSpec)}" />
+        <j:if test="${iconDef != null}">
+          <j:set var="style" value="${attrs.style}" />
+          <j:if test="${style == null}">
+            <j:set var="style" value="${iconDef.getStyle()}" />
+          </j:if>
+
+          <img src="${iconDef.getQualifiedUrl(context)}"
+               style="${style}" onclick="${attrs.onclick}" title="${attrs.title}"
+               tooltip="${attrs.tooltip}" alt="${attrs.alt}" />
+        </j:if>
+      </j:otherwise>
+    </j:choose>
+  </j:if>
+
+</j:jelly>
