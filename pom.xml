@@ -33,7 +33,7 @@ THE SOFTWARE.
 
   <groupId>org.jenkins-ci.plugins.icon-shim</groupId>
   <artifactId>icon-shim-pom</artifactId>
-  <version>1.0.4-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Icon Shim Base POM.</name>
