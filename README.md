@@ -84,6 +84,13 @@ Your plugin will have been rendering icons as follows:
 Simply replace this `<img>` based icon markup with Icon Shim markup as follows:
 
 ```
+<lsi:icon class="icon-credentials-domain icon-xlg" alt="${safeDescription}"
+    tooltip="${safeDescription}" xmlns:lsi="/shim/layout/icon" />
+```
+
+If you need to use the old `iconSize` template variable:
+
+```
 <lsi:icon class="icon-credentials-domain" iconSize="${iconSize}" alt="${safeDescription}"
     tooltip="${safeDescription}" xmlns:lsi="/shim/layout/icon" />
 ```
