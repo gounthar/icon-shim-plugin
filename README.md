@@ -11,7 +11,7 @@ Simply add the following to your maven pom.xml depedencies (or equivalent for ot
 <dependency>
   <groupId>org.jenkins-ci.plugins.icon-shim</groupId>
   <artifactId>icon-shim</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 
@@ -61,7 +61,18 @@ public class PluginImpl extends Plugin {
 }
 ```
 
-## Step 3 - Replace icon `<img>` markup with `<lsi:icon>` shim markup
+Note (from above):
+
+1. You need to define class spec names for your icons.  Please follow the naming pattern of 'icon-`plugin-name`-`icon-name`' e.g. 'icon-credentials-new-domain', where 'credentials' is the plugin name and 'new-domain' is the icon name.
+1. Use the new icons size class specs of `icon-sm`, `icon-md`, `icon-lg` and `icon-xlg`.
+
+## Step 3 - Update Action and ManagementLink classes to implement IconSpec
+
+Update all plugin classes that implement/extend `hudson.model.Action` and `hudson.model.ManagementLink`, getting them to
+also implement the `org.jenkins.ui.icon.IconSpec` interface.
+
+
+## Step 4 - Replace icon `<img>` markup with `<lsi:icon>` shim markup
 
 Your plugin will have been rendering icons as follows:
 
@@ -79,5 +90,5 @@ Simply replace this `<img>` based icon markup with Icon Shim markup as follows:
 
 The Icon Shim tag will figure out if the underlying Jenkins instance has the core `<l:icon>` layout tag, or not.  After
 making that evaluation it will either render an old-style `<img>` icon, or it will delegate to the core `<l:icon>` layout
-tag to let it render the icon.  Of course, the shim tag will also translate the old icon size tokens ('16x16',
-'24x24', '32x32' and '48x48') to their new equivalent class specs ('icon-sm', 'icon-md', 'icon-lg' and 'icon-xlg').
+tag to let it render the icon.  Of course, the shim tag will also translate the old icon size tokens (`16x16`,
+`24x24`, `32x32` and `48x48`) to their new equivalent class specs (`icon-sm`, `icon-md`, `icon-lg` and `icon-xlg`).
