@@ -22,32 +22,9 @@
 // THE SOFTWARE.
 //
 
-@import "./mixins.less";
-@import "./icons/#icons"; // Must be a "<theme-name>-icons.less" file e.g. "classic-icons.less"
+@import "font-awesome/variables.less";
+@import "font-awesome/path.less";
+@import "font-awesome/core.less";
+@import "font-awesome/icons.less";
 
-//
-//  Define the size, display etc
-//
-
-.icon-display {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.icon-sm {
-  width: 16px; height: 16px;
-  .icon-display;
-}
-.icon-md {
-  width: 24px; height: 24px;
-  .icon-display;
-}
-.icon-lg {
-  width: 32px; height: 32px;
-  .icon-display;
-}
-.icon-xlg {
-  width: 48px; height: 48px;
-  .icon-display;
-}
-
+@import "./status-icons.less";

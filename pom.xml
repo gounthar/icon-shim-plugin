@@ -28,7 +28,7 @@ THE SOFTWARE.
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>1.520</version>
+    <version>1.583-SNAPSHOT</version>
   </parent>
 
   <groupId>org.jenkins-ci.plugins.icon-shim</groupId>
