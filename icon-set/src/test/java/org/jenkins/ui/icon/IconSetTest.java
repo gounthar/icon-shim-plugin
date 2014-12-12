@@ -42,6 +42,29 @@ public class IconSetTest {
     }
 
     @Test
+    public void test_no_url() {
+        IconSet.icons.addIcon(new Icon("icon-12345 icon-sm", Icon.ICON_SMALL_STYLE));
+        Icon icon = IconSet.icons.getIconByNormalizedCSSSelector(".icon-12345.icon-sm");
+        Assert.assertEquals("icon-12345 icon-sm", icon.getClassSpec());
+        Assert.assertEquals(null, icon.getUrl());
+    }
+
+    @Test
+    public void test_icon_redefine() {
+        IconSet.icons.addIcon(new Icon("icon-12345 icon-sm", "/images/xxxx", Icon.ICON_SMALL_STYLE));
+
+        Icon iconT1 = IconSet.icons.getIconByNormalizedCSSSelector(".icon-12345.icon-sm");
+        Assert.assertEquals("icon-12345 icon-sm", iconT1.getClassSpec());
+        Assert.assertEquals("xxxx", iconT1.getUrl());
+
+        IconSet.icons.addIcon(new Icon("icon-12345 icon-sm", Icon.ICON_SMALL_STYLE));
+
+        Icon iconT2 = IconSet.icons.getIconByNormalizedCSSSelector(".icon-12345.icon-sm");
+        Assert.assertEquals("icon-12345 icon-sm", iconT2.getClassSpec());
+        Assert.assertEquals(null, iconT2.getUrl());
+    }
+
+    @Test
     public void test_toNormalizedIconUrl() {
         Assert.assertEquals(null, IconSet.toNormalizedIconUrl((String)null));
         Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("aaaa"));

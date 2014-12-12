@@ -65,15 +65,29 @@ public class Icon {
      * Creates a {@link IconType#CORE core} icon.
      *
      * @param classSpec The icon class names.
+     * @param style     The icon style.
+     */
+    public Icon(String classSpec, String style) {
+        this(classSpec, null, style, IconType.CORE);
+    }
+
+    /**
+     * Icon instance.
+     * <p/>
+     * Creates a {@link IconType#CORE core} icon.
+     *
+     * @param classSpec The icon class names.
      * @param url       The icon image url.
      * @param style     The icon style.
      */
     public Icon(String classSpec, String url, String style) {
         this(classSpec, url, style, IconType.CORE);
-        if (url.startsWith("images/")) {
-            this.iconType = IconType.CORE;
-        } else if (url.startsWith("plugin/")) {
-            this.iconType = IconType.PLUGIN;
+        if (url != null) {
+            if (url.startsWith("images/")) {
+                this.iconType = IconType.CORE;
+            } else if (url.startsWith("plugin/")) {
+                this.iconType = IconType.PLUGIN;
+            }
         }
     }
 
@@ -130,7 +144,11 @@ public class Icon {
      * @return The qualified icon url.
      */
     public String getQualifiedUrl(JellyContext context) {
-        return iconType.toQualifiedUrl(url, context);
+        if (url != null) {
+            return iconType.toQualifiedUrl(url, context);
+        } else {
+            return "";
+        }
     }
 
     /**

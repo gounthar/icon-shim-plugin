@@ -26,6 +26,7 @@
 package org.jenkins.ui.icon;
 
 
+import org.apache.commons.jelly.JellyContext;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -51,4 +52,11 @@ public class IconTest {
         Assert.assertEquals("icon-sm", Icon.toNormalizedIconSizeClass("16x16"));
         Assert.assertEquals("xxx", Icon.toNormalizedIconSizeClass("xxx"));
     }
+
+    @Test
+    public void test_no_url() {
+        Icon icon = new Icon("icon-aborted icon-sm", Icon.ICON_SMALL_STYLE);
+        Assert.assertEquals("", icon.getQualifiedUrl(new JellyContext()));
+    }
+
 }

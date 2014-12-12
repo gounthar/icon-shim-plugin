@@ -51,7 +51,10 @@ public class IconSet {
 
     public IconSet addIcon(Icon icon) {
         iconsByCSSSelector.put(icon.getNormalizedSelector(), icon);
-        iconsByUrl.put(icon.getUrl(), icon);
+        if (icon.getUrl() != null) {
+            iconsByUrl.put(icon.getUrl(), icon);
+        }
+        iconsByClassSpec.clear(); // regenerate, in case an icon has been redefined.
         return this;
     }
 
