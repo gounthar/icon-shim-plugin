@@ -39,10 +39,15 @@ public class IconSet {
     private Map<String, Icon> iconsByCSSSelector = new ConcurrentHashMap<String, Icon>();
     private Map<String, Icon> iconsByUrl  = new ConcurrentHashMap<String, Icon>();
     private Map<String, Icon> iconsByClassSpec = new ConcurrentHashMap<String, Icon>();
+    private Map<String, Icon> coreIcons = new ConcurrentHashMap<String, Icon>();
 
     private static final Icon NO_ICON = new Icon("_", "_", "_");
 
     public IconSet() {
+    }
+
+    public Map<String, Icon> getCoreIcons() {
+        return coreIcons;
     }
 
     public static void initPageVariables(JellyContext context) {
@@ -659,5 +664,8 @@ public class IconSet {
         icons.addIcon(new Icon("icon-user icon-xlg", "48x48/user.png", Icon.ICON_XLARGE_STYLE));
         icons.addIcon(new Icon("icon-warning icon-xlg", "48x48/warning.png", Icon.ICON_XLARGE_STYLE));
         icons.addIcon(new Icon("icon-yellow icon-xlg", "48x48/yellow.png", Icon.ICON_XLARGE_STYLE));
+
+        // Capture a list of the core icons.
+        icons.coreIcons.putAll(icons.iconsByCSSSelector);
     }
 }
