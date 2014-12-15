@@ -167,7 +167,15 @@ public class IconSet {
 
         url = Icon.toNormalizedIconUrl(url);
 
-        return iconsByUrl.get(url);
+        Icon icon = iconsByUrl.get(url);
+        if (icon != null) {
+            return icon;
+        }
+
+        // We support interpretation of the url as being a base icon name so as to support
+        // Action.getIconFileName() returning a base icon name (medium ala - task bar).
+        // This is ugly, but that's a legacy of many things being non-CSS in Jenkins.
+        return getIconByClassSpec(url + " icon-md");
     }
 
     /**
