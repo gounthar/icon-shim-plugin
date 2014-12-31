@@ -58,6 +58,7 @@ public class Icon {
     private final String url;
     private final String style;
     private IconType iconType;
+    private boolean useCSSRendering = false;
 
     /**
      * Icon instance.
@@ -105,6 +106,9 @@ public class Icon {
         this.url = toNormalizedIconUrl(url);
         this.style = style;
         this.iconType = iconType;
+        if (url == null) {
+            useCSSRendering = true;
+        }
     }
 
     /**
@@ -126,19 +130,64 @@ public class Icon {
     }
 
     /**
-     * Get the icon url.
+     * Get the icon URL.
+     * <p/>
+     * This URL is the URL of the icon image defined for the "classic" icon theme implementation.
+     * This URL is still useful/needed for icon lookup even when {@link #setUseCSSRendering(boolean) rendering pure CSS icons}.
+     * This is because Jenkins traditionally defines URLs for icons e.g. {@link hudson.model.Action#getIconFileName()}
+     * (which would be the "classic" theme impl URL). That way, the URL can be used to get back to the icon class
+     * specification needed to render the icon via CSS.
      *
      * @return The icon url.
+     * @see #isUseCSSRendering()
      */
     public String getUrl() {
         return url;
     }
 
     /**
+     * Use CSS when rendering the icon markup.
+     *
+     * @return {@code true} when pure CSS rendering is to be used, otherwise false.
+     * @see #setUseCSSRendering(boolean)
+     */
+    public boolean isUseCSSRendering() {
+        return useCSSRendering;
+    }
+
+    /**
+     * Set the icon to use CSS when rendering the icon markup.
+     * <p/>
+     * If not set, Jenkins will render an &lt;img&gt; element. Set this when the icon has a pure css
+     * definition e.g. via a theme.
+     *
+     * @param useCSSRendering {@code true} when CSS rendering is to be used, otherwise false.
+     * @see #isUseCSSRendering()
+     */
+    public void setUseCSSRendering(boolean useCSSRendering) {
+        this.useCSSRendering = useCSSRendering;
+    }
+
+    /**
      * Get the qualified icon url.
      * <p/>
      * Qualifying the URL involves prefixing it depending on whether the icon is a core or plugin icon.
-     * Core icons are prefixed with the
+     * Uses the current {@link org.kohsuke.stapler.StaplerRequest} instance to resolve the Jenkins resource URL.
+     *
+     * @return The qualified icon url.
+     */
+    public String getQualifiedUrl() {
+        if (url != null) {
+            return iconType.toQualifiedUrl(url);
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * Get the qualified icon url.
+     * <p/>
+     * Qualifying the URL involves prefixing it depending on whether the icon is a core or plugin icon.
      *
      * @param context The JellyContext.
      * @return The qualified icon url.
@@ -262,6 +311,10 @@ public class Icon {
         if (url.startsWith("/")) {
             url = url.substring(1);
         }
+        if (url.startsWith("jenkins/")) {
+            url = url.substring("jenkins/".length());
+        }
+
         if (url.startsWith("images/")) {
             return url.substring("images/".length());
         }

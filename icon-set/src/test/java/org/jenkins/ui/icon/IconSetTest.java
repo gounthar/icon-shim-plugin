@@ -68,8 +68,12 @@ public class IconSetTest {
     public void test_toNormalizedIconUrl() {
         Assert.assertEquals(null, IconSet.toNormalizedIconUrl((String)null));
         Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("aaaa"));
+        Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("/images/aaaa"));
         Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("images/aaaa"));
+        Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("/jenkins/images/aaaa"));
+        Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("jenkins/images/aaaa"));
         Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("plugin/aaaa"));
+        Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("jenkins/plugin/aaaa"));
         Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("/images/aaaa"));
         Assert.assertEquals("aaaa", IconSet.toNormalizedIconUrl("/plugin/aaaa"));
     }
