@@ -164,8 +164,9 @@ public class Icon {
      * @param useCSSRendering {@code true} when CSS rendering is to be used, otherwise false.
      * @see #isUseCSSRendering()
      */
-    public void setUseCSSRendering(boolean useCSSRendering) {
+    public Icon setUseCSSRendering(boolean useCSSRendering) {
         this.useCSSRendering = useCSSRendering;
+        return this;
     }
 
     /**
