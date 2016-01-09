@@ -23,10 +23,8 @@
  */
 package org.jenkins.ui.icon;
 
-import hudson.Functions;
 import org.apache.commons.jelly.JellyContext;
 import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * Icon type.
@@ -48,35 +46,7 @@ public enum IconType {
      */
     public String toQualifiedUrl(String url, JellyContext context) {
         String resURL = context.getVariable("resURL").toString();
-        return toQualifiedUrl(url, resURL);
-    }
 
-    /**
-     * Qualify the supplied icon url.
-     * <p/>
-     * Qualifying the URL involves prefixing it depending on whether the icon is a core or plugin icon.
-     * Uses the current {@link StaplerRequest} instance to resolve the Jenkins resource URL.
-     *
-     * @param url The url to be qualified.
-     * @return The qualified icon url.
-     */
-    public String toQualifiedUrl(String url) {
-        StaplerRequest currentRequest = Stapler.getCurrentRequest();
-        String rootURL = (currentRequest != null ? currentRequest.getContextPath() : "");
-        String resURL = rootURL + Functions.getResourcePath();
-        return toQualifiedUrl(url, resURL);
-    }
-
-    /**
-     * Qualify the supplied icon url.
-     * <p/>
-     * Qualifying the URL involves prefixing it depending on whether the icon is a core or plugin icon.
-     *
-     * @param url The url to be qualified.
-     * @param resURL The resource url prefix.
-     * @return The qualified icon url.
-     */
-    public String toQualifiedUrl(String url, String resURL) {
         switch (this) {
             case CORE: {
                 return resURL + "/images/" + url;

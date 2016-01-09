@@ -92,7 +92,9 @@ THE SOFTWARE.
             <j:set var="style" value="${iconDef.getStyle()}" />
           </j:if>
 
-          <span class="${iconSpec}" tooltip="${attrs.tooltip}" onclick="${attrs.onclick}" title="${attrs.title}" style="${style}"></span>
+          <img src="${iconDef.getQualifiedUrl(context)}"
+               style="${style}" onclick="${attrs.onclick}" title="${attrs.title}"
+               tooltip="${attrs.tooltip}" alt="${attrs.alt}" />
         </j:if>
       </j:otherwise>
     </j:choose>
