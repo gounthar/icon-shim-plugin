@@ -11,9 +11,11 @@ Simply add the following to your maven pom.xml depedencies (or equivalent for ot
 <dependency>
   <groupId>org.jenkins-ci.plugins.icon-shim</groupId>
   <artifactId>icon-shim</artifactId>
-  <version>1.0.3</version>
+  <version>[VERSION]</version>
 </dependency>
 ```
+
+Consult [the plugin wiki](https://wiki.jenkins-ci.org/display/JENKINS/Icon+Shim+Plugin) for the latest __VERSION__ number.
 
 ## Step 2 - Add Plugin icons to the IconSet
 
