@@ -40,7 +40,7 @@ THE SOFTWARE.
   </description>
 
   <properties>
-    <stapler.version>1.227</stapler.version>
+    <stapler.version>1.236</stapler.version>
   </properties>
 
   <dependencies>
