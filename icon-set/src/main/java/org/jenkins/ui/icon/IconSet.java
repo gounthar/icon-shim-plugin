@@ -57,7 +57,7 @@ public class IconSet {
     }
 
     /**
-     * Get an icon instance from it's {@link  Icon#toNormalizedCSSSelector(String) normalized CSS selector}.
+     * Get an icon instance from its {@link  Icon#toNormalizedCSSSelector(String) normalized CSS selector}.
      * @param cssSelector The icon's normalized CSS selector.
      * @return The icon instance, or {@code null} if no such icon.
      */
@@ -69,7 +69,7 @@ public class IconSet {
     }
 
     /**
-     * Get an icon instance from it's {@link  Icon#toNormalizedCSSSelector(String) normalized CSS selector}.
+     * Get an icon instance from its {@link  Icon#toNormalizedCSSSelector(String) normalized CSS selector}.
      * @param cssSelector The icon's normalized CSS selector.
      * @return The icon instance, or {@code null} if no such icon.
      */
@@ -125,7 +125,7 @@ public class IconSet {
     }
 
     /**
-     * Get an icon instance from it's url.
+     * Get an icon instance from its url.
      * @param url The icon url.
      * @return The icon instance, or {@code null} if no such icon.
      */
@@ -137,7 +137,7 @@ public class IconSet {
     }
 
     /**
-     * Get an icon instance from it's url.
+     * Get an icon instance from its url.
      * @param url The icon url.
      * @return The icon instance, or {@code null} if no such icon.
      */
