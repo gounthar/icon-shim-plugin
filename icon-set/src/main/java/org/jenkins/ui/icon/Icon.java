@@ -25,6 +25,7 @@ package org.jenkins.ui.icon;
 
 import org.apache.commons.jelly.JellyContext;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -61,7 +62,7 @@ public class Icon {
 
     /**
      * Icon instance.
-     * <p/>
+     * <br><br>
      * Creates a {@link IconType#CORE core} icon.
      *
      * @param classSpec The icon class names.
@@ -122,7 +123,7 @@ public class Icon {
 
     /**
      * Get the qualified icon url.
-     * <p/>
+     * <br><br>
      * Qualifying the URL involves prefixing it depending on whether the icon is a core or plugin icon.
      * Core icons are prefixed with the
      *
@@ -188,7 +189,7 @@ public class Icon {
 
     /**
      * Generate a normalized CSS selector from the space separated list of icon class names.
-     * <p/>
+     * <br><br>
      * The normalized CSS selector is the list of class names, alphabetically sorted and dot separated.
      * This means that "icon-help icon-xlg" and "icon-xlg icon-help" have the same normalized
      * selector ".icon-help.icon-xlg".  Spaces are not relevant etc.
@@ -254,7 +255,7 @@ public class Icon {
         return originalUrl;
     }
 
-    private static class StringComparator implements Comparator<String> {
+    private static class StringComparator implements Comparator<String>, Serializable {
 
         @Override
         public int compare(String s1, String s2) {
