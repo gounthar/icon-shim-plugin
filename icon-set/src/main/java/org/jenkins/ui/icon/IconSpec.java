@@ -25,7 +25,7 @@ package org.jenkins.ui.icon;
 
 /**
  * Icon Specification.
- * <p/>
+ * <br><br>
  * Plugin extension points that implement/extend Action/ManagementLink should
  * also implement this interface.
  *
@@ -35,7 +35,7 @@ public interface IconSpec {
 
     /**
      * Get the Icon class specification e.g. 'icon-notepad'.
-     * <p/>
+     * <br><br>
      * Note: do <strong>NOT</strong> include icon size specifications (such as 'icon-sm').
      *
      * @return The Icon class specification e.g. 'icon-notepad'.

@@ -37,7 +37,7 @@ public enum IconType {
 
     /**
      * Qualify the supplied icon url.
-     * <p/>
+     * <br><br>
      * Qualifying the URL involves prefixing it depending on whether the icon is a core or plugin icon.
      *
      * @param url The url to be qualified.
