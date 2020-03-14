@@ -7,7 +7,7 @@ older versions of Jenkins core that do not have the icon tag.
 
 Simply add the following to your maven pom.xml depedencies (or equivalent for other build descriptor):
 
-```
+```xml
 <dependency>
   <groupId>org.jenkins-ci.plugins.icon-shim</groupId>
   <artifactId>icon-shim</artifactId>
@@ -15,7 +15,7 @@ Simply add the following to your maven pom.xml depedencies (or equivalent for ot
 </dependency>
 ```
 
-Consult [the plugin wiki](https://wiki.jenkins-ci.org/display/JENKINS/Icon+Shim+Plugin) for the latest __VERSION__ number.
+Consult [the plugin wiki](https://plugins.jenkins.io/icon-shim/) for the latest __VERSION__ number.
 
 ## Step 2 - Add Plugin icons to the IconSet
 
@@ -25,7 +25,7 @@ based icons when the plugin is installed on a Jenkins version that doesn't have 
 A good place to do this is in the Plugin's `Plugin` implementation class.  If the Plugin doesn't already have a
 `Plugin` implementation, just add one as follows (e.g. for the Credentials Plugin). Jenkins will find and use it:
 
-```
+```java
 public class PluginImpl extends Plugin {
 
     @Override
@@ -78,21 +78,21 @@ also implement the `org.jenkins.ui.icon.IconSpec` interface.
 
 Your plugin will have been rendering icons as follows:
 
-```
+```html
 <img src="${resURL}/plugin/credentials/images/${iconSize}/domain.png"
      alt="${safeDescription}" tooltip="${safeDescription}" class="icon${iconSize}"/>
 ```
 
 Simply replace this `<img>` based icon markup with Icon Shim markup as follows:
 
-```
+```xml
 <lsi:icon class="icon-credentials-domain icon-xlg" alt="${safeDescription}"
     tooltip="${safeDescription}" xmlns:lsi="/shim/layout/icon" />
 ```
 
 If you need to use the old `iconSize` template variable:
 
-```
+```xml
 <lsi:icon class="icon-credentials-domain" iconSize="${iconSize}" alt="${safeDescription}"
     tooltip="${safeDescription}" xmlns:lsi="/shim/layout/icon" />
 ```
@@ -101,3 +101,8 @@ The Icon Shim tag will figure out if the underlying Jenkins instance has the cor
 making that evaluation it will either render an old-style `<img>` icon, or it will delegate to the core `<l:icon>` layout
 tag to let it render the icon.  Of course, the shim tag will also translate the old icon size tokens (`16x16`,
 `24x24`, `32x32` and `48x48`) to their new equivalent class specs (`icon-sm`, `icon-md`, `icon-lg` and `icon-xlg`).
+
+## Changelog
+For recent versions, see [GitHub Releases](https://github.com/jenkinsci/icon-shim-plugin/releases)
+
+For versions 2.0.3 and older, see [CHANGELOG.md](CHANGELOG.md)

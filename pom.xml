@@ -42,7 +42,7 @@ THE SOFTWARE.
     plugin module) if Jenkins core can lose it's dependency on the icon-set module. This should be possible if we
     change the core icon tag to use CSS based icons.
   </description>
-  <url>https://wiki.jenkins-ci.org/display/JENKINS/Icon+Shim+Plugin</url>
+  <url>https://github.com/jenkinsci/icon-shim-plugin</url>
 
   <licenses>
     <license>
