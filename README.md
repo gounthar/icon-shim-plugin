@@ -101,3 +101,8 @@ The Icon Shim tag will figure out if the underlying Jenkins instance has the cor
 making that evaluation it will either render an old-style `<img>` icon, or it will delegate to the core `<l:icon>` layout
 tag to let it render the icon.  Of course, the shim tag will also translate the old icon size tokens (`16x16`,
 `24x24`, `32x32` and `48x48`) to their new equivalent class specs (`icon-sm`, `icon-md`, `icon-lg` and `icon-xlg`).
+
+## Changelog
+For recent versions, see [GitHub Releases](https://github.com/jenkinsci/icon-shim-plugin/releases)
+
+For versions 2.0.3 and older, see [CHANGELOG.md](CHANGELOG.md)
