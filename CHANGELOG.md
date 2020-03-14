@@ -5,6 +5,6 @@
 -   [JENKINS-33095](https://issues.jenkins-ci.org/browse/JENKINS-33095)
     Working around fatal error occurring when upgrading [CloudBees
     Folders
-    plugin](https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Folders+Plugin)
+    plugin](https://plugins.jenkins.io/cloudbees-folder/)
     and [Matrix Authorization Strategy
-    Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Matrix+Authorization+Strategy+Plugin).
+    Plugin](https://plugins.jenkins.io/matrix-auth/).
